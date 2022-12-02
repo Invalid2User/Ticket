@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Repository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Ticket</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Repository.java</span></div><h1>Repository.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">public class Repository {</span>
+<span class="fc" id="L2">    private Ticket[] tickets = new Ticket[0];</span>
+
+    public void save(Ticket ticket) {
+<span class="fc" id="L5">        Ticket[] tmp = new Ticket[tickets.length + 1];</span>
+<span class="fc bfc" id="L6" title="All 2 branches covered.">        for (int i = 0; i &lt; tickets.length; i++) {</span>
+<span class="fc" id="L7">            tmp[i] = tickets[i];</span>
+        }
+<span class="fc" id="L9">        tmp[tmp.length - 1] = ticket;</span>
+<span class="fc" id="L10">        tickets = tmp;</span>
+<span class="fc" id="L11">    }</span>
+
+    public Ticket[] findAll() {
+<span class="fc" id="L14">        return tickets;</span>
+    }
+
+    public Ticket findById(int id) {
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        for (Ticket ticket : tickets) {</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">            if (ticket.getId() == id) {</span>
+<span class="nc" id="L20">                return ticket;</span>
+            }
+        }
+<span class="nc" id="L23">        return null;</span>
+    }
+
+    public void remove(int id) {
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (findById(id) == null) {</span>
+<span class="nc" id="L28">            throw new NotFoundException(id);</span>
+        }
+<span class="nc" id="L30">        Ticket[] tmp = new Ticket[tickets.length - 1];</span>
+<span class="nc" id="L31">        int copyToIndex = 0;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        for (Ticket ticket : tickets) {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (ticket.getId() != id) {</span>
+<span class="nc" id="L34">                tmp[copyToIndex] = ticket;</span>
+<span class="nc" id="L35">                copyToIndex++;</span>
+            }
+        }
+<span class="nc" id="L38">        tickets = tmp;</span>
+<span class="nc" id="L39">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
